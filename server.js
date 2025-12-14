@@ -65,13 +65,16 @@ async function ensureDatabaseInitialized() {
       password: process.env.DB_PASS || "",
       port: process.env.DB_PORT ? parseInt(process.env.DB_PORT, 10) : undefined,
       multipleStatements: true,
+      ssl: {
+  ca: process.env.CA
+}
     };
-    if (process.env.DB_SSL) {
-      connOptions.ssl = {
-        rejectUnauthorized:
-          process.env.DB_SSL === "REQUIRED" || process.env.DB_SSL === "true",
-      };
-    }
+    // if (process.env.DB_SSL) {
+    //   connOptions.ssl = {
+    //     rejectUnauthorized:
+    //       process.env.DB_SSL === "REQUIRED" || process.env.DB_SSL === "true",
+    //   };
+    // }
     console.log(connOptions)
 
     const conn = await mysql.createConnection(connOptions);

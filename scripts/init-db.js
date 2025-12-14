@@ -15,14 +15,20 @@ const mysql = require("mysql2/promise");
       password: process.env.DB_PASS || "",
       port: process.env.DB_PORT ? parseInt(process.env.DB_PORT, 10) : undefined,
       multipleStatements: true,
+      ssl: {
+  ca: process.env.CA
+}
+  //     ssl: {
+  //   rejectUnauthorized: true
+  // }
     };
 
-    if (process.env.DB_SSL) {
-      connOptions.ssl = {
-        rejectUnauthorized:
-          process.env.DB_SSL === "REQUIRED" || process.env.DB_SSL === "true",
-      };
-    }
+    // if (process.env.DB_SSL) {
+    //   connOptions.ssl = {
+    //     rejectUnauthorized:
+    //       process.env.DB_SSL === "REQUIRED" || process.env.DB_SSL === "true",
+    //   };
+    // }
 
     const conn = await mysql.createConnection(connOptions);
 
