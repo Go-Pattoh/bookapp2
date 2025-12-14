@@ -1,0 +1,25 @@
+{
+  "name": "shelfcloud-server",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "init-db": "node scripts/init-db.js",
+    "dev": "nodemon server.js",
+    "build": "node scripts/build.js",
+     "start:dist": "node dist/server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.21.2",
+    "express-session": "^1.18.2",
+    "morgan": "^1.10.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.3.0",
+    "nodemon": "^3.1.11"
+    
+  }
+}

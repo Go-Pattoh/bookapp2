@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register - ShelfCloud</title>
+  <link rel="stylesheet" href="lastlastA.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="theme.js" defer></script>
+  <style>
+    /* Minimalist Theme (responsive to site variables) */
+    body.auth-page {
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .auth-card {
+      background: var(--surface);
+      border: 1px solid var(--edge);
+      border-radius: 12px;
+      width: 100%;
+      max-width: 400px;
+      padding: 3rem 2.5rem;
+      text-align: center;
+      box-shadow: 0 20px 40px var(--card-shadow);
+    }
+
+    .auth-logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    .auth-subtitle {
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+      font-size: 0.95rem;
+    }
+
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .input-group {
+      text-align: left;
+      position: relative;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 14px 16px;
+      padding-right: 45px;
+      /* Space for eye icon */
+      border: 1px solid var(--edge);
+      border-radius: 8px;
+      font-size: 1rem;
+      background: var(--bg);
+      transition: all 0.2s ease;
+      color: var(--text);
+    }
+
+    .input-group input:focus {
+      border-color: var(--accent);
+      background: var(--surface);
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.04);
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 16px;
+      top: 38px;
+      /* Adjusted based on label height + padding */
+      cursor: pointer;
+      color: #999;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+
+    .password-toggle:hover {
+      color: var(--text);
+    }
+
+    .auth-btn {
+      background: var(--accent);
+      color: #ffffff;
+      border: none;
+      padding: 16px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+      margin-top: 0.5rem;
+    }
+
+    .auth-btn:hover {
+      opacity: 0.85;
+    }
+
+    .auth-btn:active {
+      transform: scale(0.99);
+    }
+
+    .auth-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    .auth-footer {
+      margin-top: 2.5rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .auth-footer a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    .auth-footer a:hover {
+      border-bottom-color: var(--text);
+    }
+
+    .error-msg {
+      color: #f25454;
+      font-size: 0.85rem;
+      margin-top: -0.5rem;
+      display: none;
+      text-align: left;
+      background: rgba(242, 84, 84, 0.08);
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+
+    .home-link {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+
+    .home-link:hover {
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body class="auth-page">
+
+  <a href="/" class="home-link"><i class="fa-solid fa-arrow-left"></i> Back</a>
+
+  <div class="auth-card">
+    <a href="/" class="auth-logo">ShelfCloud <i class="fa-solid fa-people-roof"></i></a>
+    <p class="auth-subtitle">Create your account</p>
+
+    <form id="registerForm" class="auth-form" novalidate>
+
+      <div class="input-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="name@example.com" required autofocus />
+      </div>
+
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Min 6 characters" required minlength="6" />
+        <i class="fa-solid fa-eye password-toggle" id="togglePassword"></i>
+      </div>
+
+      <div class="input-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter password" required />
+        <i class="fa-solid fa-eye password-toggle" id="toggleConfirmPassword"></i>
+      </div>
+      <div id="formError" class="error-msg"></div>
+
+      <button type="submit" class="auth-btn" id="submitBtn">Create Account</button>
+    </form>
+
+    <div class="auth-footer">
+      Have an account? <a href="login.html">Sign in</a>
+    </div>
+  </div>
+
+  <script>
+    // Redirect if already authenticated
+    fetch('/api/me')
+      .then(res => res.json())
+      .then(user => {
+        if (user.userId) {
+          window.location.href = '/';
+        }
+      })
+      .catch(() => { });
+
+    const registerForm = document.getElementById('registerForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const errorDiv = document.getElementById('formError');
+    const passwordInput = document.getElementById('password');
+    const confirmInput = document.getElementById('confirmPassword');
+    const togglePassword = document.getElementById('togglePassword');
+    const toggleConfirm = document.getElementById('toggleConfirmPassword');
+
+    function toggleVisibility(targetInput, toggleEl) {
+      toggleEl.addEventListener('click', () => {
+        const type = targetInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        targetInput.setAttribute('type', type);
+        toggleEl.classList.toggle('fa-eye');
+        toggleEl.classList.toggle('fa-eye-slash');
+      });
+    }
+
+    toggleVisibility(passwordInput, togglePassword);
+    toggleVisibility(confirmInput, toggleConfirm);
+
+    function showError(message) {
+      errorDiv.textContent = message;
+      errorDiv.style.display = message ? 'block' : 'none';
+    }
+
+    registerForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      showError('');
+
+      const email = document.getElementById('email').value.trim();
+      const password = passwordInput.value;
+      const confirmPassword = confirmInput.value;
+
+      if (!email) {
+        return showError('Please enter a valid email.');
+      }
+      if (!password || password.length < 6) {
+        return showError('Password must be at least 6 characters long.');
+      }
+      if (password !== confirmPassword) {
+        return showError('Passwords do not match.');
+      }
+
+      try {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Creating account...';
+
+        const res = await fetch('/api/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data.message || 'Registration failed');
+        }
+
+        submitBtn.textContent = 'Success';
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 300);
+      } catch (err) {
+        console.error(err);
+        showError(err.message || 'An error occurred. Please try again.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Create Account';
+      }
+    });
+  </script>
+</body>
+
+</html>

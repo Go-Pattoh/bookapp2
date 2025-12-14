@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ShelfCloud - Online Open Library</title>
+  <link rel="stylesheet" href="lastlastA.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="theme.js" defer></script>
+</head>
+
+<body>
+
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="/" class="logo">ShelfCloud <i class="fa-solid fa-people-roof"></i></a>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="/" class="active"><i class="fa-solid fa-house"></i> <span>Home</span></a></li>
+          <li><a href="account.html"><i class="fa-solid fa-book-open"></i> <span>My Library</span></a></li>
+          <li><a href="#"><i class="fa-solid fa-compass"></i> <span>Explore</span></a></li>
+          <li><a href="#"><i class="fa-solid fa-pen-nib"></i> <span>Authors</span></a></li>
+        </ul>
+
+        <div class="nav-divider"></div>
+
+        <ul>
+          <li><a href="about.html"><i class="fa-solid fa-circle-info"></i> <span>About</span></a></li>
+          <li><a href="help.html"><i class="fa-solid fa-circle-question"></i> <span>Help</span></a></li>
+        </ul>
+        
+        <div class="nav-divider"></div>
+
+        <ul class="auth-nav">
+          <!-- Auth links injected via JS, but structure ready -->
+          <li id="nav-login"><a href="login.html"><i class="fa-solid fa-sign-in-alt"></i> <span>Login</span></a></li>
+          <li id="nav-register"><a href="register.html"><i class="fa-solid fa-user-plus"></i> <span>Register</span></a></li>
+          <li id="nav-logout" style="display:none"><a href="#" id="logoutLink"><i class="fa-solid fa-sign-out-alt"></i> <span>Logout</span></a></li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button id="theme-toggle" class="icon-btn" title="Toggle light/dark">
+          <i id="theme-icon" class="fa-solid fa-moon"></i>
+        </button>
+        <a href="#" class="settings-link"><i class="fa-solid fa-gear"></i> Settings</a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Top Header -->
+      <header class="top-header">
+        <button class="menu-toggle" aria-label="Toggle Menu"><i class="fa-solid fa-bars"></i></button>
+        
+        <div class="search-container">
+          <i class="fa-solid fa-search search-icon"></i>
+          <form role="search" id="form" novalidate style="display:contents">
+             <input type="text" id="query" placeholder="Search books, authors, ISBNs..." required autocomplete="off" />
+          </form>
+        </div>
+
+        <div class="header-actions">
+           <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+           <button id="ka-toggle" class="user-profile-btn" aria-label="User Menu">
+             <img src="https://ui-avatars.com/api/?name=User&background=random" alt="User" class="avatar">
+             <span class="user-name">Guest</span>
+             <i class="fa-solid fa-chevron-down"></i>
+           </button>
+        </div>
+      </header>
+
+      <div class="content-scrollable">
+        <!-- Filter Bar -->
+        <div class="filter-bar-container">
+          <div class="filter-bar">
+            <button class="filter-chip active" data-category="all">All</button>
+            <button class="filter-chip" data-category="programming">Programming</button>
+            <button class="filter-chip" data-category="scientific">Scientific</button>
+            <button class="filter-chip" data-category="nature">Nature</button>
+            <button class="filter-chip" data-category="fiction">Fiction</button>
+            <button class="filter-chip" data-category="history">History</button>
+            <button class="filter-chip" data-category="art">Art</button>
+          </div>
+        </div>
+
+        <!-- Featured Books -->
+        <section id="featured-section">
+          <div class="section-header">
+            <h3 class="featured-title">Library</h3>
+            <div class="view-options">
+               <!-- Future view toggles -->
+            </div>
+          </div>
+          
+          <div id="searchError" style="color:#e74c3c; margin-bottom:20px; display:none"></div>
+          
+          <!-- Content populated by JS -->
+          <!-- Results container: JS will render results inside this element so the section header and other UI remain stable -->
+          <div id="results-container"></div>
+          <!-- We need to ensure the JS targets the right container. The original JS likely appends to #featured-section or .books inside it. 
+               I'll add the .books container here to be safe if the JS expects it, or let JS create it. 
+               Looking at original HTML, it just had <section id="featured-section"> ... </section> and JS likely did innerHTML or append.
+               Let's assume JS appends to #featured-section.
+          -->
+        </section>
+
+        <!-- Footer inside main content -->
+        <footer>
+          <p>&copy; 2023 ShelfCloud. <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        </footer>
+      </div>
+    </main>
+  </div>
+
+  <!-- Right sliding panel for user menu (kept for compatibility with existing JS) -->
+  <div id="ka-panel" class="ka-panel" aria-hidden="true">
+    <div class="ka-panel-header">
+      <h3>Account</h3>
+      <button id="ka-close" class="ka-close" aria-label="Close">✕</button>
+    </div>
+    <div class="ka-panel-body">
+      <div id="ka-content">
+        <!-- content populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <script src="googleapi_mod.js.js"></script>
+</body>
+
+</html>

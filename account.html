@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - ShelfCloud</title>
+  <link rel="stylesheet" href="lastlastA.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="theme.js" defer></script>
+  <style>
+    .dash-container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      color: var(--text);
+    }
+
+    .dash-header {
+      background: var(--surface);
+      padding: 1.5rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px var(--card-shadow);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .dash-title h2 {
+      font-size: 1.5rem;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+
+    .dash-title p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .user-actions button {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .user-actions button:hover {
+      background: #c0392b;
+    }
+
+    .downloads-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .dl-card {
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      gap: 16px;
+      box-shadow: 0 2px 8px var(--card-shadow);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1px solid var(--edge);
+    }
+
+    .dl-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px var(--card-shadow);
+    }
+
+    .dl-card img {
+      width: 80px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .dl-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .dl-title {
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .dl-meta {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .dl-date {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: auto;
+    }
+
+    .dl-actions {
+      margin-top: 8px;
+    }
+
+    .dl-actions a {
+      font-size: 0.85rem;
+      color: #4da3e0;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .dl-actions a:hover {
+      text-decoration: underline;
+    }
+
+    /* Guest State */
+    .guest-state {
+      text-align: center;
+      padding: 4rem 1rem;
+      background: var(--surface);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px var(--card-shadow);
+    }
+
+    .guest-state h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .guest-state p {
+      color: #7f8c8d;
+      margin-bottom: 2rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, #3498db, #2980b9);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-block;
+      transition: transform 0.2s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .loading-state {
+      text-align: center;
+      padding: 3rem;
+      color: #7f8c8d;
+
+      < !doctype html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Dashboard - ShelfCloud</title><link rel="stylesheet" href="lastlastA.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" /><style>.dash-container {
+        max-width: 1000px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        color: var(--text);
+      }
+
+      .dash-header {
+        background: var(--surface);
+        padding: 1.5rem 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px var(--card-shadow);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+
+      .dash-title h2 {
+        font-size: 1.5rem;
+        color: var(--text);
+        margin-bottom: 0.2rem;
+      }
+
+      .dash-title p {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .user-actions button {
+        background: #e74c3c;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: background 0.2s;
+      }
+
+      .user-actions button:hover {
+        background: #c0392b;
+      }
+
+      .downloads-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+      }
+
+      .dl-card {
+        background: var(--surface);
+        border-radius: 12px;
+        padding: 16px;
+        display: flex;
+        gap: 16px;
+        box-shadow: 0 2px 8px var(--card-shadow);
+        transition: transform 0.2s, box-shadow 0.2s;
+        border: 1px solid var(--edge);
+      }
+
+      .dl-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px var(--card-shadow);
+      }
+
+      .dl-card img {
+        width: 80px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 6px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .dl-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .dl-title {
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 4px;
+        line-height: 1.3;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .dl-meta {
+        font-size: 0.85rem;
+        color: var(--muted);
+        margin-bottom: 8px;
+      }
+
+      .dl-date {
+        font-size: 0.75rem;
+        color: var(--muted);
+        margin-top: auto;
+      }
+
+      .dl-actions {
+        margin-top: 8px;
+      }
+
+      .dl-actions a {
+        font-size: 0.85rem;
+        color: #4da3e0;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .dl-actions a:hover {
+        text-decoration: underline;
+      }
+
+      /* Guest State */
+      .guest-state {
+        text-align: center;
+        padding: 4rem 1rem;
+        background: var(--surface);
+        border-radius: 12px;
+        box-shadow: 0 4px 12px var(--card-shadow);
+      }
+
+      .guest-state h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: var(--text);
+      }
+
+      .guest-state p {
+        color: #7f8c8d;
+        margin-bottom: 2rem;
+      }
+
+      .btn-primary {
+        background: linear-gradient(90deg, #3498db, #2980b9);
+        color: white;
+        padding: 12px 24px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        display: inline-block;
+        transition: transform 0.2s;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+      }
+
+      .loading-state {
+        text-align: center;
+        padding: 3rem;
+        color: #7f8c8d;
+      }
+  </style>
+</head>
+
+<body>
+
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="/" class="logo">ShelfCloud <i class="fa-solid fa-people-roof"></i></a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="/"><i class="fa-solid fa-house"></i> <span>Home</span></a></li>
+          <li><a href="account.html" class="active"><i class="fa-solid fa-book-open"></i> <span>My Library</span></a>
+          </li>
+          <li><a href="#"><i class="fa-solid fa-compass"></i> <span>Explore</span></a></li>
+          <li><a href="#"><i class="fa-solid fa-pen-nib"></i> <span>Authors</span></a></li>
+        </ul>
+
+        <div class="nav-divider"></div>
+
+        <ul>
+          <li><a href="about.html"><i class="fa-solid fa-circle-info"></i> <span>About</span></a></li>
+          <li><a href="help.html"><i class="fa-solid fa-circle-question"></i> <span>Help</span></a></li>
+        </ul>
+
+        <div class="nav-divider"></div>
+
+        <ul class="auth-nav">
+          <!-- Auth links injected via JS -->
+          <li id="nav-login"><a href="login.html"><i class="fa-solid fa-sign-in-alt"></i> <span>Login</span></a></li>
+          <li id="nav-register"><a href="register.html"><i class="fa-solid fa-user-plus"></i> <span>Register</span></a>
+          </li>
+          <li id="nav-logout" style="display:none"><a href="#" id="logoutLink"><i class="fa-solid fa-sign-out-alt"></i>
+              <span>Logout</span></a></li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button id="theme-toggle" class="icon-btn" title="Toggle light/dark">
+          <i id="theme-icon" class="fa-solid fa-moon"></i>
+        </button>
+        <a href="#" class="settings-link"><i class="fa-solid fa-gear"></i> Settings</a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Top Header -->
+      <header class="top-header">
+        <button class="menu-toggle" aria-label="Toggle Menu"><i class="fa-solid fa-bars"></i></button>
+
+        <div class="search-container">
+          <!-- Search hidden on account page or could be global -->
+        </div>
+
+        <div class="header-actions">
+          <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+          <button id="ka-toggle" class="user-profile-btn" aria-label="User Menu">
+            <img src="https://ui-avatars.com/api/?name=User&background=random" alt="User" class="avatar">
+            <span class="user-name">Guest</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+        </div>
+      </header>
+
+      <div class="content-scrollable">
+
+        <div class="dash-container" style="max-width: 1000px; margin: 2rem auto;">
+
+          <div id="loading" class="loading-state">
+            <i class="fa-solid fa-circle-notch fa-spin fa-2x"></i>
+            <p style="margin-top:10px">Loading your library...</p>
+          </div>
+
+          <div id="guestView" style="display:none" class="guest-state">
+            <i class="fa-solid fa-lock fa-3x" style="color:var(--muted); margin-bottom:1rem"></i>
+            <h3>Access Restricted</h3>
+            <p>Please log in to view your downloaded books and manage your account.</p>
+            <a href="login.html" class="btn-primary"
+              style="background:var(--primary); color:white; padding:10px 20px; border-radius:8px; text-decoration:none;">Sign
+              In</a>
+            <div style="margin-top:1rem; font-size:0.9rem">
+              New here? <a href="register.html" style="color:var(--accent)">Create an account</a>
+            </div>
+          </div>
+
+          <div id="userView" style="display:none">
+            <div class="dash-header"
+              style="background:var(--surface); padding:1.5rem 2rem; border-radius:12px; border:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+              <div class="dash-title">
+                <h2 id="welcomeMsg" style="font-size:1.5rem; color:var(--text); margin-bottom:0.2rem;">Welcome back</h2>
+                <p style="color:var(--text-muted); font-size:0.9rem;">Here are the books you've saved to your library.
+                </p>
+              </div>
+              <div class="user-actions">
+                <!-- Logout handled by sidebar/header now, but can keep a secondary one or remove -->
+              </div>
+            </div>
+
+            <div id="downloadsGrid" class="books">
+              <!-- Populated by JS -->
+            </div>
+            <div id="noDownloads" style="display:none; text-align:center; padding:3rem; color:var(--text-muted);">
+              <i class="fa-solid fa-book-open fa-2x" style="margin-bottom:1rem; opacity:0.5"></i>
+              <p>You haven't saved any books yet.</p>
+              <a href="/" style="color:var(--primary); font-weight:600">Browse Books</a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Footer inside main content -->
+        <footer>
+          <p>&copy; 2023 ShelfCloud. <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        </footer>
+      </div>
+    </main>
+  </div>
+
+  <!-- Right sliding panel for user menu -->
+  <div id="ka-panel" class="ka-panel" aria-hidden="true">
+    <div class="ka-panel-header">
+      <h3>Account</h3>
+      <button id="ka-close" class="ka-close" aria-label="Close">✕</button>
+    </div>
+    <div class="ka-panel-body">
+      <div id="ka-content">
+        <!-- content populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <script src="googleapi_mod.js.js"></script>
+  <script>
+    // Specific logic for account page content
+    const loading = document.getElementById('loading');
+    const guestView = document.getElementById('guestView');
+    const userView = document.getElementById('userView');
+    const welcomeMsg = document.getElementById('welcomeMsg');
+    const downloadsGrid = document.getElementById('downloadsGrid');
+    const noDownloads = document.getElementById('noDownloads');
+
+    // Override the checkAuthAndUpdateUI from googleapi_mod.js.js to also handle this page's specific views
+    // Or better, listen to a custom event or just poll/wait. 
+    // Since googleapi_mod.js.js runs checkAuthAndUpdateUI on load, we can hook into it or just run our own check.
+
+    async function initAccountPage() {
+      try {
+        const meRes = await fetch('/api/me');
+        const me = await meRes.json();
+
+        if (!me.userId) {
+          showGuest();
+          // Also update auth nav visibility
+          const navLogin = document.getElementById('nav-login');
+          const navRegister = document.getElementById('nav-register');
+          const navLogout = document.getElementById('nav-logout');
+          if (navLogin) navLogin.style.display = 'block';
+          if (navRegister) navRegister.style.display = 'block';
+          if (navLogout) navLogout.style.display = 'none';
+          return;
+        }
+
+        showUser(me);
+        // Update auth nav visibility for logged in user
+        const navLogin = document.getElementById('nav-login');
+        const navRegister = document.getElementById('nav-register');
+        const navLogout = document.getElementById('nav-logout');
+        const logoutLink = document.getElementById('logoutLink');
+        if (navLogin) navLogin.style.display = 'none';
+        if (navRegister) navRegister.style.display = 'none';
+        if (navLogout) navLogout.style.display = 'block';
+        if (logoutLink) {
+          logoutLink.addEventListener('click', async (e) => {
+            e.preventDefault();
+            try {
+              await fetch('/api/logout', { method: 'POST' });
+              window.location.reload();
+            } catch (err) {
+              console.error('Logout failed', err);
+            }
+          });
+        }
+        await loadDownloads();
+
+      } catch (err) {
+        console.error('Init error:', err);
+        loading.innerHTML = '<p>Error loading dashboard. Please refresh.</p>';
+      }
+    }
+
+    function showGuest() {
+      loading.style.display = 'none';
+      guestView.style.display = 'block';
+      userView.style.display = 'none';
+    }
+
+    function showUser(user) {
+      loading.style.display = 'none';
+      guestView.style.display = 'none';
+      userView.style.display = 'block';
+      const displayName = user.username || user.email?.split("@")[0] || 'Reader';
+      welcomeMsg.textContent = `Welcome, ${displayName}`;
+      
+      // Update avatar in header
+      const avatarImg = document.querySelector(".avatar");
+      const userNameSpan = document.querySelector(".user-name");
+      if (avatarImg && user.email) {
+        const initials = user.email
+          .split("@")[0]
+          .substring(0, 2)
+          .toUpperCase()
+          .padEnd(2, "U");
+        avatarImg.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+          initials
+        )}&background=random&color=fff&size=128`;
+        avatarImg.alt = displayName;
+      }
+      if (userNameSpan) {
+        userNameSpan.textContent = displayName;
+      }
+    }
+
+    async function loadDownloads() {
+      try {
+        const res = await fetch('/api/downloads');
+        const data = await res.json();
+
+        if (!data.downloads || data.downloads.length === 0) {
+          noDownloads.style.display = 'block';
+          return;
+        }
+
+        noDownloads.style.display = 'none';
+        downloadsGrid.innerHTML = '';
+
+        data.downloads.forEach(book => {
+          const card = document.createElement('div');
+          card.className = 'book-card'; // Use global book-card class
+
+          const coverUrl = book.cover || 'https://via.placeholder.com/150x220?text=No+Cover';
+          const authors = book.authors ? book.authors.join(', ') : 'Unknown Author';
+          const date = new Date(book.saved_at).toLocaleDateString();
+
+          card.innerHTML = `
+            <img src="${coverUrl}" alt="${book.title}" class="book-cover">
+            <div class="book-title">${book.title}</div>
+            <div class="book-authors">${authors}</div>
+            <div class="book-year" style="font-size:0.8rem; color:var(--text-muted)">Saved: ${date}</div>
+            <div class="card-footer">
+               <a href="${book.infoLink || '#'}" target="_blank" class="btn-action btn-download" style="text-align:center; text-decoration:none">View Info</a>
+            </div>
+          `;
+          downloadsGrid.appendChild(card);
+        });
+
+      } catch (err) {
+        console.error('Downloads error:', err);
+        downloadsGrid.innerHTML = '<p>Failed to load downloads.</p>';
+      }
+    }
+
+    // Run after a slight delay to ensure googleapi_mod might have run its auth check (though we run our own)
+    initAccountPage();
+  </script>
+</body>
+
+</html>
